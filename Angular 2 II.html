@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.8 (453749)"/><meta name="author" content="johnjamesmartin@live.com"/><meta name="created" content="2016-04-16 02:24:23 +0000"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2016-05-07 23:48:01 +0000"/><title>Angular 2 II</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css"/>
+<style>
+body { 
+    padding: 80px;
+}
+
+img {
+    width: 40%; height: 40%; 
+}
+</style>
+</head><body>
+<h2>Angular 2 Course Notes</h2>
+<p>Course: <a href="https://www.udemy.com/angular-2-tutorial-for-beginners/learn/v4/overview">https://www.udemy.com/angular-2-tutorial-for-beginners/learn/v4/overview</a></p>
+<div><span style="font-size: 24px;">Introduction</span></div>
+<div><br/></div>
+<div>In a nutshell, we have four key players in an Angular 2 app: </div>
+<div><img src="Angular%202%20II.resources/Screen%20Shot%202016-04-16%20at%2003.24.14.png" height="352" width="1460"/></div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><u><span style="font-size: 18px;">Components</span></u></div>
+<div><br/></div>
+<ul>
+<li>Components offer a modular way of writing web applications.</li>
+<li>They encapsulate the template, data, and behaviour of a view.</li>
+<li>In a sense, it may be helpful to think of components as "view components".</li>
+<li>All Angular 2 apps have at least one component: the “root" component.</li>
+<li>Production-level apps typically consist of 10s or 100s of components.</li>
+<li>A component is represented by a plain Typescript class. For example:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-16%20at%2003.33.25.png" height="296" width="654"/></div>
+<div><br/></div>
+<ul>
+<li>As with the previous Angular framework, all Angular code is decoupled from the DOM and linked using “binding”. This enforces a strict MVC architecture and allows for easier unit testing.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Services</u></span></div>
+<div><br/></div>
+<ul>
+<li>A service is a plain class that encapsulates non-UI logic, e.g. HTTP calls, logging, etc.</li>
+<li>To ensure a separation of concerns in our app, we delegate any logic that is not related to view to a “service”.</li>
+<li>Allows our components to talk to backend APIs</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Router</u></span></div>
+<div><br/></div>
+<ul>
+<li>A router is purely responsible for navigation.</li>
+<li>As the user navigates through the SPA, the URL changes (the path is replaced) to to correspond with changes that will be presented to the user.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Directive</u></span></div>
+<div><br/></div>
+<ul>
+<li>"To modify DOM elements and/or to extend their behaviour”.</li>
+<li>Similar to components, we use directives to work with the DOM.</li>
+<li>A directive, unlike a component, doesn’t have the template or HTML markup.</li>
+<li>We often use them to add behaviour to existing DOM elements.</li>
+<li>For example, we can make a textbook automatically grow when it receives focus:<br/>
+<br/></li>
+</ul>
+<div><img src="Angular%202%20II.resources/Screen%20Shot%202016-04-16%20at%2003.51.34.png" height="230" width="666"/></div>
+<ul>
+<li>Angular has a bunch of built-in directives for common tasks like adding or removing DOM elements, adding classes to them, repeating them, etc.</li>
+<li>But we can also create custom directives.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Creating an App Overview</u></span></div>
+<div><br/></div>
+<ul>
+<li>The proper way to create an Angular 2 app is with the NPM package "angular-cli”.</li>
+<li>When it’s not available (at the time of this writing is hasn’t been released yet), we use download a template to get us started.<br/>
+<br/></li>
+</ul>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Config File</u></span></div>
+<div><br/></div>
+<ul>
+<li>The config file contains properties that config how we will transpile our code.</li>
+<li>The “target” property determines which version of JavaScript will be output from our TypeScript. In most cases, this will be ES5.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Typings</u></span></div>
+<div><br/></div>
+<ul>
+<li>“typings” (as named in the template app I downloaded) is another file that configures our files.</li>
+<li>When using external JavaScript libraries in TypeScript, we need to import a TypeScript definition file. This gives us static type checking and intellisense for that library.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Package</u></span></div>
+<div><br/></div>
+<ul>
+<li>“package.json” is our Node package configuration file. It overviews the name and version of our app — as well as providing a few Node commands.</li>
+<li>There’s also a listing of the dependencies used: which packages will be used and which version that needs to be included to make the app run.</li>
+</ul>
+<div><br/></div>
+<div>Note: You may have to paste this on the top of the root component file if errors are seen in the command line:  <span style="color: rgb(34, 36, 38); font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; background-color: rgb(238, 238, 238);">/// &lt;reference path="../typings/browser.d.ts" /&gt;</span></div>
+<div><span style="font-size: 13px;"><span style="font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif;"><span style="background-color: rgb(238, 238, 238);"><span style="color: rgb(34, 36, 38);"><br/></span></span></span></span></div>
+<hr/>
+<div><span style="font-size: 13px;"><span style="font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif;"><span style="background-color: rgb(238, 238, 238);"><span style="color: rgb(34, 36, 38);"><br/></span></span></span></span></div>
+<div><span style="font-size: 18px;"><u>Root Component</u></span></div>
+<div><br/></div>
+<ul>
+<li>Our root element is nothing more than a TypeScript class decorated with a component decorator (sometimes called annotation):</li>
+</ul>
+<div><br/></div>
+<div>              <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-16%20at%2015.30.57.png" height="288" width="834"/></div>
+<div><br/></div>
+<ul>
+<li>Our root element is nothing more than a TypeScript class decorated with a component decorator (sometimes called annotation).</li>
+<li>Before we declare our class and write the decorator, we must import “Component” from the Angular library.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Export Keyword</u></span></div>
+<div><br/></div>
+<ul>
+<li>We use export so the components we define will be available to other components in our app (by importing it).</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Selector Property</u></span></div>
+<div><br/></div>
+<ul>
+<li>Selector is a key-pair value within the @Component decorator. It contains a value that specifies a CSS selector. When Angular see an element that matches this CSS selector, it will create an instance or component in the host element.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Template Property</u></span></div>
+<div><br/></div>
+<ul>
+<li>Template specifies the HTML that will be inserted into the DOM when the components view is rendered.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Variables in the Class</u></span></div>
+<div><br/></div>
+<ul>
+<li>To create a variable in the class, we can define the variable type as well as the variable name. It’s best practice, although not entirely necessary, because TypeScript infers the type. Here’s an example of defining the variable type as a string:<br/>
+<br/></li>
+</ul>
+<div>                <img src="Angular%202%20II.resources/C38FF48C-65DE-4973-9FDB-8C843B89674A.png" height="150" width="964"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Back Tick</u></span></div>
+<div>
+<div><br/></div>
+</div>
+<ul>
+<li>The back tick: ` character allows us to write code over multiple lines.</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><span style="font-size: 18px;"><u>Binding</u></span></div>
+<div><br/></div>
+<ul>
+<li>The are different kinds of bindings. We can bind various properties of DOM elements with our Component properties, we can apply classes on _ dynamically, and how to apply events raised from DOM elements.</li>
+<li>We bind using “interpolation”.</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div>
+<div><span style="font-size: 18px;"><u>Property Binding</u></span></div>
+</div>
+<div><br/></div>
+<ul>
+<li>When Angular 2 compiles our templates, the {{ title }} parts of our template (which as an interpolation is really just syntactic sugar) is translated into property binding.</li>
+<li>With property binding, we bind the property of a DOM element, such as “src” in “img src” to a property in our component.</li>
+<li>There are two syntaxes for property binding in Angular 2:</li>
+</ul>
+<div>          </div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-17%20at%2015.40.21.png" height="198" width="698"/></div>
+<div><br/></div>
+<ul>
+<li>So which style should we use? For property bindings, stick to one style — keep your code clean and consistent.</li>
+<li>Mosh (instructor) tends to use square brackets.</li>
+<li>Here’s property binding using square brackets syntax on an h1 tag:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-17%20at%2015.43.13.png" height="114" width="820"/></div>
+<div><br/></div>
+<ul>
+<li>So, as you can see the properties in the square brackets are DOM elements. They are not HTML tags. You would use "getElementById(‘someTitle’).textContent=‘title’” to do the same thing in plain JavaScript.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Class Binding</u></span></div>
+<div><br/></div>
+<ul>
+<li>Sometimes we may want to add a class to a DOM element based on some condition.</li>
+<li>For example, here we can change classes of a button depending on the truth value of our AppComponent class’s “isActive” property:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-17%20at%2016.05.17.png" height="492" width="1810"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Style Binding</u></span></div>
+<div><br/></div>
+<ul>
+<li>Style binding is a variation of property binding and similar to class binding.</li>
+<li>For example, below we use dynamic inline CSS. A ternary operator evaluates whether “isActive” is true in our AppComponent class — if it is, we change the buttons background colour to blur and if it’s not, we change the buttons background colour to grey:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-17%20at%2016.23.51.png" height="590" width="1798"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Event Binding</u></span></div>
+<div><br/></div>
+<ul>
+<li>We use event binding to handle events raised from the DOM (e.g. keystrokes, mouse movements, clicks, etc.).</li>
+<li>Similar to property binding, we have two syntaxes for event binding (parentheses or a prefix):</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2000.59.07.png" height="490" width="1324"/></div>
+<div><br/></div>
+<ul>
+<li>Again, it doesn’t matter which syntax we uses — so long as we keep consistent.</li>
+<li>To pass the target of our event through the event method, we use the following syntax:<br/>
+<br/></li>
+</ul>
+<div>               <img src="Angular%202%20II.resources/4F7F93D5-FE3F-4B6C-AA5E-D0B643473DB3.png" height="726" width="1480"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Two-Way Binding</u></span></div>
+<div><br/></div>
+<ul>
+<li>In Angular 2, we can use a directive call “ngModel” to create two-way binding between a DOM property and a Component property.</li>
+<li>To write an ngModel, we use the following syntax which represents event binding () within property binding []:<br/>
+<br/></li>
+</ul>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2002.11.08.png" height="58" width="1034"/></div>
+<div><br/></div>
+<ul>
+<li>Alternatively, we can use the prefix notation:<br/>
+<br/></li>
+</ul>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2002.12.52.png" height="58" width="1090"/></div>
+<div><br/></div>
+<ul>
+<li>Note: Angular 2 (at the core) doesn't really have two-way binding — it’s one-way binding with syntactical sugar.</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Binding Summary</u></span></div>
+<div><br/></div>
+<ul>
+<li>Make sure you know what all of these are:</li>
+</ul>
+<div><br/></div>
+<div>                    <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2021.19.28.png" height="944" width="1088"/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Component API</u></span></div>
+<div><br/></div>
+<ul>
+<li>Creating a component API allows the user to bind components to some data. For example:</li>
+</ul>
+<div><br/></div>
+<div>                    <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.03.49.png" height="794" width="1270"/></div>
+<ul>
+<li>We can also use event binding to subscribe to events raised from this component:</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<div>                    <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.04.29.png" height="902" width="1242"/></div>
+<div><br/></div>
+<ul>
+<li>When the user clicks the icon, the favourite component can raise a change event and the app component will be notified:</li>
+</ul>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2021.43.51.png" height="660" width="1486"/></div>
+<div><br/></div>
+<ul>
+<li>To achieve this we have to define a public API for the component. We can mark one or more properties as input or output properties. These properties will be visible from the outside and available for property or event binding.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Input Properties</u></span></div>
+<div><br/></div>
+<ul>
+<li>To declare properties in our classes as public, we can use an @Input() decorator:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/56C5CAA4-1F3D-4F9B-B280-8372ADE05C21.png" height="256" width="786"/></div>
+<div><br/></div>
+<ul>
+<li>There’s another way to do this which uses “inputs” as a component property that’s an array of inputs in our class. This isn’t generally recommend, however, because it’s somewhat “fragile” (you have to update strings within the array to match updated class properties, or the app breaks).</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Output Properties</u></span></div>
+<div><br/></div>
+<ul>
+<li>Output properties involve events.</li>
+<li>To raise a custom event, we have to declare an EventEmitter():</li>
+</ul>
+<div>     </div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.27.18.png" height="372" width="1090"/></div>
+<div><br/></div>
+<ul>
+<li>Like inputs, output methods have an @Output decorator that makes it a public part of the API:</li>
+</ul>
+<div>               </div>
+<div>                <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.29.14.png" height="46" width="664"/></div>
+<div><br/></div>
+<ul>
+<li>With every decorator we use, we have to import them from Angular2’s core library:</li>
+</ul>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.30.44.png" height="56" width="1206"/></div>
+<div><br/></div>
+<ul>
+<li>Output decorators can take arguments:</li>
+</ul>
+<div><br/></div>
+<div><img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.34.12.png" height="64" width="450"/></div>
+<div><br/></div>
+<div>To create an event method, we use the following syntax:</div>
+<div><br/></div>
+<div><img src="Angular%202%20II.resources/Screen%20Shot%202016-04-18%20at%2023.36.15.png" height="484" width="1386"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Templates</u></span></div>
+<div><br/></div>
+<ul>
+<li>To further separate concerns, we can use “templateUrl” in place of “template” in our component and reference an external HTML file — rather than writing inline HTML.</li>
+<li>However, if there’s only a small amount of inline HTML — don’t bother! Using templateUrl and calling in external HTML causes the app to make an additional HTTP request. This is slightly less efficient, but FYI: the HTTP request is only made once to this page because of caching.</li>
+</ul>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-19%20at%2000.51.42.png" height="624" width="1454"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Styles</u></span></div>
+<div><br/></div>
+<ul>
+<li>StyleUrls are similar to templateUrls but deal with CSS.</li>
+<li>The interesting thing is that these styles are scoped to the component in which they’re defined — they won’t leak to the outer HTML.</li>
+<li>We can use inline styles (the use of square brackets is something that confuses even the instructor) or we can use external styles in an array:</li>
+</ul>
+<div>          </div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-19%20at%2000.54.38.png" height="328" width="1166"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Ng-If</u></span></div>
+<div><br/></div>
+<ul>
+<li>The ng-if directive is used to display DOM elements if they meet certain conditions. For example:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-20%20at%2014.54.22.png" height="742" width="1082"/></div>
+<div><br/></div>
+<ul>
+<li>This can be similarly achieved with “hidden” property binding:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-20%20at%2014.56.15.png" height="732" width="1142"/></div>
+<div><br/></div>
+<ul>
+<li>So which should we use? NgIf or Hidden property binding? It depends on how many child elements there are. If there are many, then ngIf makes more sense (it uses less memory):</li>
+</ul>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-20%20at%2014.58.01.png" height="1014" width="1996"/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Ng-Switch</u></span></div>
+<div>
+<div><br/></div>
+</div>
+<ul>
+<li>The ng-if directive is used to display DOM elements if they meet certain conditions. For example:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-20%20at%2023.37.03.png" height="870" width="1832"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Ng-For: Setting an Index</u></span></div>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2000.51.12.png" height="682" width="1436"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Ng-For Asterisk (*)</u></span></div>
+<div><br/></div>
+<ul>
+<li>The reason we have to prefix ngFor with * (*ngFor) is to treat the content like a template. Angular 2 will automatically generate &lt;template&gt; tags and wrap the looped content within them.</li>
+<li>If we didn’t have the * prefix, this is what we’d have to write (this is what Angular 2 does under the hood):</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2000.54.50.png" height="188" width="1338"/></div>
+<div><br/></div>
+<div>Note: this is also how Ng-If works.</div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Pipes</u></span></div>
+<div><br/></div>
+<ul>
+<li>In Angular, we use pipes to format data.</li>
+<li>Angular has a number of built-in pipes, such as:
+<ul>
+<li>Uppercase</li>
+<li>Lowercase</li>
+<li>Decimal</li>
+<li>Currency</li>
+<li>Date</li>
+<li>Json</li>
+</ul>
+</li>
+<li>We can also create our own custom pipes.</li>
+<li>Here is the syntax for including pipes:<br/>
+<br/></li>
+</ul>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.05.10.png" height="660" width="1340"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div>
+<div><span style="font-size: 18px;"><u>Custom Pipes</u></span></div>
+</div>
+<div><br/></div>
+<ul>
+<li>To create a custom pipe, we use the following syntax after creating our pipe.ts file:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.10.48.png" height="542" width="1008"/></div>
+<div><br/></div>
+<ul>
+<li>We need have to include it in our app.component.ts file. We first import the pipe, then define a pipes property inside the component decorator and then pipe the interpolation string we wish to apply the formatting to:</li>
+</ul>
+<div><br/></div>
+<div>             <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.13.13.png" height="370" width="758"/></div>
+<div><br/></div>
+<ul>
+<li>Another thing we can do in creating a pipe is give it a custom attribute. For example, the summary pipe can be limited to 10 characters instead of 50:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.18.32.png" height="486" width="924"/></div>
+<div><br/></div>
+<ul>
+<li>To enable this, however, we need to do one more thing — we have to allow for this custom attribute to be passed as an argument into our SummaryPipe class:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.17.24.png" height="546" width="1600"/></div>
+<div><br/></div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><span style="font-size: 18px;"><u>Ng Class</u></span></div>
+<div><br/></div>
+<ul>
+<li>When working with lots of classes (with class binding) inside a template, it’s cleaner to use the ng-class directive. Here’s an example that doesn’t contain lots of classes, but still demonstrates the syntax we would use (the red lines show the code we’re replacing):</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/51EE5D64-B905-4E18-9775-627DC7A3423A.png" height="546" width="1294"/></div>
+<div><br/></div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><span style="font-size: 18px;"><u>Ng Style</u></span></div>
+<div><br/></div>
+<ul>
+<li>Similar to ng-class is ng-style, which is useful when we need to set multiple inline styles simultaneously:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/9E36652E-DE52-4248-9521-74F06F1A10C7.png" height="532" width="1484"/></div>
+<div><br/></div>
+<div>Note: Ng Style is a bit of an anti-pattern. You should prefer to use Ng Class instead!</div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><span style="font-size: 18px;"><u>Elvis Operator</u></span></div>
+<div><br/></div>
+<ul>
+<li>Similar to a ternary operator, we can use the Elvis operator to check a value and assign one of two values — outputting one depending on whether a condition is met:</li>
+</ul>
+<div><br/></div>
+<div>     Ternary operator:</div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.32.56.png" height="78" width="1734"/></div>
+<div><br/></div>
+<div>     Elvis operator:</div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.33.44.png" height="76" width="1198"/></div>
+<div><br/></div>
+<ul>
+<li>Both of these methods do the same thing: they check whether a property of an object is not null and then output it if it’s not null.</li>
+<li>The Elvis operator tends to be cleaner, but it also has the advantage of chaining:<br/>
+<br/></li>
+</ul>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2001.35.49.png" height="68" width="1326"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Ng Content</u></span></div>
+<div><br/></div>
+<ul>
+<li>Ng-content allows us to transclude information (usually inserting content from the app component into a custom component):</li>
+</ul>
+<div><br/></div>
+<div>         <img src="Angular%202%20II.resources/2F7C55F8-8313-4FCD-A3F1-90A0602DD3A0.png" height="568" width="1048"/>  </div>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2003.21.34.png" height="482" width="846"/>           </div>
+<div><br/></div>
+<ul>
+<li>Here we can use multiple insertion points:</li>
+</ul>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2003.20.48.png" height="660" width="1368"/></div>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2003.23.43.png" height="532" width="1348"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Namespacing</u></span></div>
+<div><br/></div>
+<ul>
+<li>Namespacing is a technique in programming in which to prevent collisions between variable names.</li>
+<li>When creating components in Angular 2, a good namespacing technique is to prefix element names with the component name. For example: “zippy-title” inside a zippy component — rather than just “title”, which might appear elsewhere in the application.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Forms</u></span></div>
+<div>
+<div><br/></div>
+</div>
+<ul>
+<li>Nearly every application needs a form.</li>
+<li>In Angular 2, we have two different types of forms: template driven and model-driven.
+<ul>
+<li>Template-driven forms are easier to implement and involve writing less code, but give us limited control over validation.</li>
+<li>Model-driven forms require us to write a little more code, but we have full control over validation.</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Zen Coding</u></span></div>
+<div><br/></div>
+<ul>
+<li>Zen coding is a short-hand way of writing HTML. For example:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2021.09.04.png" height="48" width="912"/></div>
+<div><br/></div>
+<ul>
+<li style="display:inline;list-style:none;">
+<ul>
+<li>.form-group represents a CSS class.</li>
+<li>&gt; represents immediate children.</li>
+<li>+ represents siblings.</li>
+<li>[ .. ] represents attributes</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Control and ControlGroup Classes in Angular</u></span></div>
+<div><br/></div>
+<ul>
+<li>The “Control" class represents a single input field in a form.</li>
+<li>It has a property that tells us values of the input field, whether it has been touched or untouched, whether it’s dirty, or pristine — as well as validation errors.</li>
+<li>We also have another useful class called “ControlGroup”, which represents a group of controls in a form. Each form is a ControlGroup because it contains at least one Control. But in an enterprise application, a form can contain multiple ControlGroups. For example: we could have a ControlGroup for a shipping address and another for a billing address. All the same properties available in Control are available in ControlGroup:</li>
+</ul>
+<div><br/></div>
+<div>                       <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2021.20.40.png" height="964" width="1864"/></div>
+<div><br/></div>
+<ul>
+<li>Advanced tip: Both the Control and ControlGroup classes derive from another class called AbstractControl (the base class that all their properties are inherited from). The following model shows this — an implementation of a model known as the "Composite Pattern”. ControlGroup is the Composite and Control is the Part:</li>
+</ul>
+<div><br/></div>
+<div>                    <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2021.21.27.png" height="1060" width="1346"/></div>
+<ul>
+<li>To implement a form in an Angular app, we have to implement the ControlGroup object for the form and a Control object for each input field.<br/>
+<br/></li>
+<li>There are two ways to create the Control objects: Implicitly (by Angular) and Explicitly (by developer). Explicitly allows developers more control over the validation logic.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Form Validation</u></span></div>
+<div><br/></div>
+<ul>
+<li>With implicitly-created controls, we have limited validation options available:
+<ul>
+<li>required</li>
+<li>minlength</li>
+<li>maxlength</li>
+</ul>
+</li>
+<li>We can, however, use temporary variables (#someVar=“ngForm”) to change the formatting of our form depending on the Control state. For example, here we implement a Control object called comment. We then set a temporary variable called “comment” and use an ngIf condition to display a warning if certain states are not realised:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-21%20at%2022.36.46.png" height="402" width="916"/></div>
+<div><br/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Showing Specific Validation Errors</u></span></div>
+<div><br/></div>
+<ul>
+<li>What if an input field needs multiple validation attributes?</li>
+<li>We then create our Control objects explicitly.</li>
+</ul>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Async Validation</u></span></div>
+<div><br/></div>
+<ul>
+<li>There are times in which we need to call a server to validate a given value. For example:  determining if a username is unique. For this we need to implement an async validator.</li>
+<li>Implementing an async validator is very similar to implementing a custom validator.</li>
+<li>Async validators classes need to return a “Promise”.</li>
+<li>A promise represents the result of an asynchronous operation.</li>
+<li>When calling the server, we’re working with an asynchronous operation.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<div><span style="font-size: 18px;"><u>Reactive Extensions</u></span></div>
+<div><br/></div>
+<ul>
+<li>Reactive extensions: a library for composing asynchronous and event-based programs using observable sequences and LINQ-style query operators.</li>
+<li>Reactive extensions prevent something known as “callback hell” in which lots of nested callback functions are implemented and become hard to maintain:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-25%20at%2023.00.37.png" height="746" width="1212"/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Observables</u></span></div>
+<div><br/></div>
+<ul>
+<li>At the core of reactive extensions we have a type called “observable”. Observables represent asynchronous data streams.</li>
+<li>Examples of asynchronous data streams:
+<ul>
+<li>DOM events.</li>
+<li>Web sockets (to implement real-time application).</li>
+<li>Web workers (to create background tasks in JS).</li>
+<li>AJAX calls.</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-26%20at%2000.13.19.png" height="830" width="1620"/></div>
+<ul>
+<li>Examples of asynchronous data streams:</li>
+</ul>
+<div><br/></div>
+<div>         <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-26%20at%2000.28.44.png" height="304" width="990"/></div>
+<div><br/></div>
+<ul>
+<li>Why are observables like this so useful? They provide a key-ups standard and unified operators that we can use to transform, filter, aggregate and combine them.</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-27%20at%2001.56.30.png" height="536" width="1720"/></div>
+<div><br/></div>
+<ul>
+<li>Look how clean and compact this code is (above). We define our observable and chain methods onto it — and doing so we can easily apply logic.</li>
+</ul>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Stripped Down Observable</u></span></div>
+<div><br/></div>
+<ul>
+<li>A light-weight, stripped down (high performance) version of Observables is available in AngularJS 2. Instead of importing "import {Observable} from 'rxjs/Rx’;” (the full set of Observable properties), we import the following: </li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-27%20at%2022.35.52.png" height="118" width="1064"/></div>
+<div><br/></div>
+<ul>
+<li>Then we specify which specific operators we are going to implement (as opposed to adding all of them):</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-27%20at%2022.38.41.png" height="232" width="1070"/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Observables Tutorial (Adventures in Rx)</u></span></div>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<ul>
+<li>In this tutorial we’ll learn how to:
+<ul>
+<li>Create an observable from DOM events.</li>
+<li>Create an observable from an array.</li>
+<li>Create an observable from a list of arguments.</li>
+<li>Implement timers.</li>
+<li>Run parallel operations.</li>
+<li>Handle Errors.</li>
+<li>Get notified when an observable completes.</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<ol>
+<li><u><b>Creating an observable from DOM events</b><br/></u></li>
+</ol>
+<div><u><br/></u></div>
+<div>Earlier we learned how to create an observable from DOM events this way:</div>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/2F8F4F28-CDA1-4A7A-B0C4-87F5694F9F99.png" height="120" width="1280"/></div>
+<div><br/></div>
+<div>The code is scored out because it’s bad. Here’s why:</div>
+<div><br/></div>
+<ul>
+<li>We should never use libraries like jQuery or work directly in the <b>document</b> object, because the whole point of Angular components is to decouple our code from the DOM.</li>
+<li>Instead, we should use property binding and let Angular work with the DOM instead.</li>
+<li>jQuery was only used in the earlier tutorials (screenshots above) to make learning easier (less complexity).</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<ol start="2">
+<li><u><b> The Angular Way</b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>In the section about forms, we look at the Control object — one representing an input field in a form.</li>
+<li>This class has a property called valueChanges, which returns an observable.</li>
+<li>We can subscribe to this observable and get notified as the value in the input field changes — no direct interaction with the DOM (just like it should be).</li>
+<li>Here we chain the valueChanges and subscribe methods to a detect changes in an input field (with an ngControl value of “search”) and log them to the console:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-28%20at%2001.04.11.png" height="984" width="1100"/></div>
+<div><br/></div>
+<ol start="3">
+<li><u><b>Creating an Observable from an Array.</b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>Creating observables is not limited to asynchronous data streams. We can create an observable from an array: </li>
+</ul>
+<div><br/></div>
+<div>             <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-28%20at%2001.34.57.png" height="64" width="1134"/></div>
+<div><br/></div>
+<ul>
+<li>This line will return an observable with three items: 1, 2 and 3. So when subscribing to this observable, we’ll get three values pushed.</li>
+<li>There are some benefits of converting an array to an observable stream:
+<ul>
+<li>We can tie this observable stream with another observable created off DOM events, AJAX calls, web sockets, etc.</li>
+<li>Example: think of a travel search engine like Kayak. Many travel search engines let the user search for flights for exact dates or within a 2-day window.</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-28%20at%2001.59.21.png" height="794" width="1114"/></div>
+<div><br/></div>
+<ol start="4">
+<li><u><b>Other Ways to Create an Observable</b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>We can use the static Observable.of() method to create an observable from a list of arguments:<br/>
+<br/>
+<img src="Angular%202%20II.resources/Screen%20Shot%202016-04-28%20at%2002.00.44.png" height="588" width="1188"/><br/>
+<br/></li>
+<li>Here’s a useful exercise to practice these methods:<br/>
+<br/></li>
+</ul>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-28%20at%2002.08.59.png" height="836" width="1454"/></div>
+<div><br/></div>
+<ol start="5">
+<li><u><b> Implement a timer</b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>We can use the static Observable.interval() method to create a timer. This is useful for running an asynchronous operation at specified intervals. For example, here’s a timer that runs on an interval of 1000ms (1s) — console logging an index value every one second:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2001.50.18.png" height="140" width="1016"/></div>
+<ul>
+<li>We can extend this example and build a client that calls the server once a minute, for example, to get the latest tweets, emails, news articles, etc.</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2001.55.54.png" height="334" width="1510"/></div>
+<ul>
+<li>In the example above, we need the map to return something so as not to return “undefined” every time the console logs:</li>
+</ul>
+<div>          </div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2001.57.27.png" height="276" width="1418"/></div>
+<ul>
+<li>This is good, but <b>flat map</b> should be used in place of map when we’re dealing with AJAX calls — otherwise the formatting looks like this: </li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2001.59.36.png" height="66" width="1126"/></div>
+<div><br/></div>
+<ul>
+<li>Here’s how we implement the flat map method in code:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2002.07.20.png" height="280" width="1154"/></div>
+<div><br/></div>
+<div><br/></div>
+<ol start="6">
+<li><u><b>Running parallel operations<br/></b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>Let’s say we want to build a page and display the user’s profile data and their tweets. Assume that your RESTful API — by design — doesn’t return the user’s profile and their tweets in a combined format. So you need to send two requests in parallel: one to get the profile and another to get the tweets.</li>
+<li>To do this, we can use the <b>forkJoin</b> method:</li>
+</ul>
+<div><br/></div>
+<div>                   <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2003.19.17.png" height="66" width="790"/></div>
+<div><br/></div>
+<ul>
+<li>To continue on with example code, let’s create two observables:</li>
+</ul>
+<div><br/></div>
+<div>         <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2003.35.26.png" height="356" width="1298"/></div>
+<ul>
+<li>The delay method simulates an AJAX request that takes 1500/2000ms.</li>
+<li>So forkJoin return an array of data elements form multiple observables.</li>
+<li>We can use the map operator to map this array into a data structure our app expects:</li>
+</ul>
+<div><br/></div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-29%20at%2003.39.54.png" height="712" width="1120"/></div>
+<div><br/></div>
+<ol start="7">
+<li><u><b> Handling errors</b></u></li>
+</ol>
+<div><u><b><br/></b></u></div>
+<ul>
+<li>Asynchronous operations that involve accessing the network can fill due to request timeouts, server failures, etc. We can handle such failures by providing a callback function as the second argument to the subscribe method:</li>
+</ul>
+<div>                    </div>
+<div>               <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-30%20at%2002.40.39.png" height="256" width="748"/></div>
+<div><br/></div>
+<ul>
+<li>We can retry a failed observable using the <b>retry</b> operator:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-04-30%20at%2002.43.34.png" height="128" width="508"/></div>
+<div><br/></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Server</u></span></div>
+<div><u><span style="font-size: 18px;"><br/></span></u></div>
+<ul>
+<li>Building RESTful APIs is beyond the scope of Angular, because Angular is a client-side rather than server-side technology (like NodeJS).</li>
+<li>To access our RESTful API, we use our HTTP class in Angular.</li>
+<li>HTTP is an abstraction of XML/HTTP request so as we can make AJAX calls to the server.</li>
+<li>We have access to standard HTTP verbs, along with some supplementary ones:
+<ul>
+<li>get()</li>
+<li>post()</li>
+<li>put()</li>
+<li>patch()</li>
+<li>delete()</li>
+<li>head()</li>
+</ul>
+</li>
+<li>Patch may be unfamiliar, but it is used to update only a part of the resource — maybe a couple of properties rather than a whole class.</li>
+<li>Head may also be unfamiliar. It is used to get meta-data from a resource — useful for when you want to check for the existence of a resource rather than retrieving a whole representation of a resource. So use it in place of get() where possible!</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+<div><u><span style="font-size: 18px;">Dependency Injection</span></u></div>
+<div><br/></div>
+<div>‘post.service.ts'</div>
+<div><br/></div>
+<div>In this file we use the @Injectable() decorator and a number of http requests and observables to retrieve data from a server.</div>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-04%20at%2021.43.50.png" height="784" width="1112"/></div>
+<div><br/></div>
+<div>‘app.component.ts'</div>
+<div><br/></div>
+<div><b>Note: the constructor should be lightweight — the following example doesn’t use best practices (which will be explored later):</b></div>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-04%20at%2021.45.59.png" height="596" width="936"/></div>
+<div><br/></div>
+<ul>
+<li>Here is the best practice code. It uses OnInit:</li>
+</ul>
+<div><br/></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-04%20at%2021.54.30.png" height="1076" width="1348"/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Life Cycle of Components (Managed by Angular)</u></span></div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-04%20at%2021.48.59.png" height="1046" width="1294"/></div>
+<hr/>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Promises vs Observables</u></span></div>
+<div><br/></div>
+<ul>
+<li>In Angular 2 apps, we prefer observables over promises when it comes to server communications.<br/>
+<br/></li>
+<li>We can easily convert an observable to a promise:</li>
+</ul>
+<div><br/></div>
+<div>     Before conversion:</div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.20.36.png" height="268" width="966"/></div>
+<div><br/></div>
+<div>     After conversion:</div>
+<div>     <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.21.53.png" height="284" width="948"/></div>
+<div><br/></div>
+<div style="margin-left:40px;"><b>Note: We have to import “toPromise()” as a Reactive extension: import {toPromise} from "rxjs/add/operator/toPromise”. We also have to change our “subscribe” method to a “then” method in app.component.ts.</b></div>
+<div><br/></div>
+<hr/>
+<div><br/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Promises vs Observables</u></span></div>
+<div><br/></div>
+<ul>
+<li>Nearly all browsers today have a security feature called “Same Origin Policy”, which prevents us from making cross-domain requests in our applications.</li>
+<li>For example: example.com can only send AJAX requests to example.com and not from example.com to other.com.</li>
+<li>Although, it’s a good security feature, there are times in which we really do need to communicate with other websites. There are workarounds for this:</li>
+</ul>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.35.08.png" height="534" width="1864"/></div>
+<ul>
+<li>JSONP is an old approach and only supports HTTP GET requests, but is supported by most websites that provide public APIs. Here we use Jsonp class instead of Http class:</li>
+</ul>
+<div><br/></div>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.36.16.png" height="558" width="1418"/></div>
+<div><br/></div>
+<ul>
+<li>Conversely, instead of HTTP_PROVIDERS in the providers array, we use JSONP_PROVIDERS:<br/>
+<br/></li>
+</ul>
+<div>          <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.37.19.png" height="144" width="992"/></div>
+<div><br/></div>
+<ul>
+<li>With CORS (Cross-Origin Resource Sharing). We don’t have the limitations of JSONP. But implementing CORS requires extra work on the server and on the client. Basically, the client needs to add additional headers in the request object asking for permission for resources on the server. Then the server responds with additional headers to determine the domains able to access the resources.</li>
+</ul>
+<div><br/></div>
+<div><b>Note: If you are going to build a public API, you need to research how to implement CORs on a server and the technology you’re using to build the API with (NodeJS, for example).</b></div>
+<div><br/></div>
+<ul>
+<li>On the client we have to add additional headers in our request object. This is easy:</li>
+</ul>
+<div><br/></div>
+<div>         <img src="Angular%202%20II.resources/Screen%20Shot%202016-05-05%20at%2001.44.22.png" height="646" width="1482"/></div>
+<div><br/></div>
+<div>
+<hr/></div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><u>Routing</u></span></div>
+<div><br/></div>
+<ul>
+<li>The first step in a Single Page Application (SPA) is to enable routing.</li>
+<li>This involves three steps:
+<ul>
+<li>Reference router script in index.html</li>
+<li>Set &lt;base href=“”&gt;</li>
+<li>Register router providers</li>
+</ul>
+</li>
+</ul>
+<div><br/></div>
+<div><br/></div>
+</body></html>
